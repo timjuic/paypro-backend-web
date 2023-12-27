@@ -24,7 +24,13 @@ public class TerminalService {
         }
     }
 
-    public ServiceResult<List<Terminal>> getAllTerminalsForMerchant() {
-        return null;
+    public ServiceResult<List<Terminal>> getAllTerminalsForMerchant(Integer merchantId) {
+        try {
+            List<Terminal> terminals = air.found.payprowebbackend.data_access.manual.TerminalRepository.getAllTerminalsForMerchant(merchantId);
+            return ServiceResult.success(terminals);
+        }
+        catch (Exception ex) {
+            return ServiceResult.failure(ApiError.ERR_INVALID_REQUEST);
+        }
     }
 }

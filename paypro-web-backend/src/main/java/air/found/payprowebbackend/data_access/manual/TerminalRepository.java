@@ -13,12 +13,36 @@ import static air.found.payprowebbackend.data_access.manual.DBRepository.*;
 
 public class TerminalRepository {
     private static final String SELECT_ALL_TERMINALS = "SELECT * FROM terminals";
+    private static final String SELECT_ALL_TERMINALS_FOR_MERCHANT = "SELECT * FROM terminals WHERE merchant_id = ?";
 
     public static List<Terminal> getAllTerminals() {
         List<Terminal> terminals = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_TERMINALS)) {
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Terminal terminal = mapResultSetToTerminal(resultSet);
+                    terminals.add(terminal);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (RuntimeException e) {
+            throw e;
+        }
+
+        return terminals;
+    }
+
+    public static List<Terminal> getAllTerminalsForMerchant(Integer merchantId) {
+        List<Terminal> terminals = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_TERMINALS_FOR_MERCHANT)) {
+
+            preparedStatement.setInt(1, merchantId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
