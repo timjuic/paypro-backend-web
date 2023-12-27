@@ -1,5 +1,6 @@
 package air.found.payprowebbackend.business_logic;
 
+import air.found.payprowebbackend.core.ApiError;
 import air.found.payprowebbackend.core.ServiceResult;
 import air.found.payprowebbackend.core.models.Merchant;
 import air.found.payprowebbackend.data_access.persistance.MerchantRepository;
@@ -14,6 +15,12 @@ public class MerchantService {
     private final MerchantRepository merchantsRepository;
 
     public ServiceResult<List<Merchant>> getAllMerchants() {
-        return null;
+        try {
+            List<Merchant> merchants = merchantsRepository.findAll();
+            return ServiceResult.success(merchants);
+        }
+        catch (Exception ex) {
+            return ServiceResult.failure(ApiError.ERR_INVALID_REQUEST);
+        }
     }
 }
