@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/terminal/{mid}")
+@RequestMapping("/terminal")
 public class TerminalController {
     private final TerminalService terminalService;
 
