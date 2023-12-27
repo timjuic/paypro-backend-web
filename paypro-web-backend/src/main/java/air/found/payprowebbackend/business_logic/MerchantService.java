@@ -16,7 +16,7 @@ public class MerchantService {
 
     public ServiceResult<List<Merchant>> getAllMerchants() {
         try {
-            List<Merchant> merchants = merchantsRepository.findAll();
+            List<Merchant> merchants = air.found.payprowebbackend.data_access.manual.MerchantRepository.getAllMerchants();
             return ServiceResult.success(merchants);
         }
         catch (Exception ex) {
