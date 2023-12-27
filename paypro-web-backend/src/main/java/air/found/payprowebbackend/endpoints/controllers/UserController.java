@@ -24,7 +24,8 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<ResponseBody<List<UserAccount>>> getAllUsers() {
-        return null;
+        ServiceResult<List<UserAccount>> result = userService.getAllUsers();
+        return respond(result, "Users fetched successfully");
     }
 
     private <T> ResponseEntity<ResponseBody<T>> respond(ServiceResult<T> result, String successMessage) {
