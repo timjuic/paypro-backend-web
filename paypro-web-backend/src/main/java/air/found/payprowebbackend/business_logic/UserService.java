@@ -32,6 +32,21 @@ public class UserService {
         }
     }
 
+    public ServiceResult<UserAccount> getUser(int id) {
+        try {
+            Optional<UserAccount> userAccount = userRepository.findById(id);
+            if(userAccount.isEmpty()) {
+                return ServiceResult.failure(ApiError.ERR_INVALID_USER);
+            }
+            UserAccount account = userAccount.get();
+            account.setPassword("*****");
+            return ServiceResult.success(account);
+        }
+        catch (Exception ex) {
+            return ServiceResult.failure(ApiError.ERR_INVALID_REQUEST);
+        }
+    }
+
     public ServiceResult<UserAccount> loginUser(UserAccount userAccount) {
         if (isInvalidEmailFormat(userAccount.getEmailAddress())) {
             return ServiceResult.failure(ApiError.ERR_INVALID_EMAIL_FORMAT);
