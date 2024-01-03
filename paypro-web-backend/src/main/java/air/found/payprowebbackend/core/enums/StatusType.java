@@ -24,4 +24,14 @@ public enum StatusType {
         }
         return null;
     }
+
+    public static StatusType valueOfId(int id) {
+        for (StatusType e : values()) {
+            if(e.getId() == id) {
+                return e;
+            }
+        }
+
+        throw new IllegalArgumentException("No enum constant with id " + id);
+    }
 }
