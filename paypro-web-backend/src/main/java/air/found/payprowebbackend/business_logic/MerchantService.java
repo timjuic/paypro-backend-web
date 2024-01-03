@@ -23,4 +23,17 @@ public class MerchantService {
             return ServiceResult.failure(ApiError.ERR_INVALID_REQUEST);
         }
     }
+
+    public ServiceResult<Merchant> getMerchant(int mid) {
+        try {
+            Merchant merchant = air.found.payprowebbackend.data_access.manual.MerchantRepository.getMerchant(mid);
+            if(merchant == null) {
+                return ServiceResult.failure(ApiError.ERR_INVALID_MERCHANT);
+            }
+            return ServiceResult.success(merchant);
+        }
+        catch (Exception ex) {
+            return ServiceResult.failure(ApiError.ERR_INVALID_REQUEST);
+        }
+    }
 }

@@ -14,6 +14,9 @@ public class MerchantRepository {
     private static final String SELECT_ALL_MERCHANTS =
             "SELECT * FROM merchants";
 
+    private static final String SELECT_MERCHANT =
+            "SELECT * FROM merchants WHERE merchant_id = ?";
+
     public static List<Merchant> getAllMerchants() {
         List<Merchant> merchants = new ArrayList<>();
 
@@ -33,6 +36,26 @@ public class MerchantRepository {
         }
 
         return merchants;
+    }
+
+    public static Merchant getMerchant(int mid) {
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MERCHANT)) {
+
+            preparedStatement.setInt(1, mid);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return mapResultSetToMerchant(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (RuntimeException e) {
+            throw e;
+        }
+
+        return null;
     }
 
     private static Merchant mapResultSetToMerchant(ResultSet resultSet) throws SQLException {
