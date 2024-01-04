@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/paypro-backend-web.iml" filepath="$PROJECT_DIR$/.idea/paypro-backend-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/paypro-web-backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/paypro-web-backend.main.iml" />
     </modules>
   </component>
 </project>
