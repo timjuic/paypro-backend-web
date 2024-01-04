@@ -9,7 +9,8 @@ public enum ApiError {
     ERR_INVALID_CREDENTIALS(3, "ERR_INVALID_CREDENTIALS", "The provided credentials are invalid!"),
     ERR_INVALID_EMAIL_FORMAT(4, "ERR_INVALID_EMAIL_FORMAT", "The email address you entered is not in a valid format. Please enter a valid email address!"),
     ERR_INVALID_USER(5, "ERR_INVALID_USER", "The user does not exist!"),
-    ERR_INVALID_MERCHANT(6, "ERR_INVALID_MERCHANT", "The merchant does not exist!");
+    ERR_INVALID_MERCHANT(6, "ERR_INVALID_MERCHANT", "The merchant does not exist!"),
+    ERR_INVALID_TERMINAL(7, "ERR_INVALID_TERMINAL", "The terminal does not exist!");
 
     private final int errorCode;
     private final String errorName;

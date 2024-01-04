@@ -2,6 +2,7 @@ package air.found.payprowebbackend.business_logic;
 
 import air.found.payprowebbackend.core.ApiError;
 import air.found.payprowebbackend.core.ServiceResult;
+import air.found.payprowebbackend.core.models.Merchant;
 import air.found.payprowebbackend.core.models.Terminal;
 import air.found.payprowebbackend.data_access.persistance.TerminalRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,19 @@ public class TerminalService {
         try {
             List<Terminal> terminals = air.found.payprowebbackend.data_access.manual.TerminalRepository.getAllTerminals();
             return ServiceResult.success(terminals);
+        }
+        catch (Exception ex) {
+            return ServiceResult.failure(ApiError.ERR_INVALID_REQUEST);
+        }
+    }
+
+    public ServiceResult<Terminal> getTerminal(int tid) {
+        try {
+            Terminal terminal = air.found.payprowebbackend.data_access.manual.TerminalRepository.getTerminal(tid);
+            if(terminal == null) {
+                return ServiceResult.failure(ApiError.ERR_INVALID_TERMINAL);
+            }
+            return ServiceResult.success(terminal);
         }
         catch (Exception ex) {
             return ServiceResult.failure(ApiError.ERR_INVALID_REQUEST);

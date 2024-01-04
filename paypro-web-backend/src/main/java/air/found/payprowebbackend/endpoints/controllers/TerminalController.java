@@ -28,10 +28,16 @@ public class TerminalController {
         return respond(result, "Terminals successfully fetched");
     }
 
-    @GetMapping("/{mid}")
+    @GetMapping("/merchant/{mid}")
     public ResponseEntity<ResponseBody<List<Terminal>>> getAllTerminalsForMerchant(@PathVariable("mid") Integer merchantId) {
         ServiceResult<List<Terminal>> result = terminalService.getAllTerminalsForMerchant(merchantId);
         return respond(result, "Terminals for merchant successfully fetched");
+    }
+
+    @GetMapping("/{tid}")
+    public ResponseEntity<ResponseBody<Terminal>> getTerminal(@PathVariable("tid") Integer terminalId) {
+        ServiceResult<Terminal> result = terminalService.getTerminal(terminalId);
+        return respond(result, "Terminal successfully fetched");
     }
 
     private <T> ResponseEntity<ResponseBody<T>> respond(ServiceResult<T> result, String successMessage) {
