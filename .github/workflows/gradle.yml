@@ -51,17 +51,17 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           
           ssh root@158.220.113.254 "\
-          mkdir -p paypro-backend-web && \
-          cd paypro-backend-web && \
+          mkdir -p paypro-web-backend && \
+          cd paypro-web-backend && \
           git init && \
-          git remote -v | grep -q 'origin' || git remote add origin https://github.com/timjuic/paypro-backend-android && \
+          git remote -v | grep -q 'origin' || git remote add origin https://github.com/timjuic/paypro-backend-web && \
           git pull origin develop && \
           ls && \
           pwd && \
-          cd paypro-backend-web &&\
+          cd paypro-web-backend &&\
           chmod +x gradlew && \
           ./gradlew build && \
           cd build/libs && \
-          nohup java -jar paypro-backend-web-0.0.1-SNAPSHOT.jar > app.log 2>&1 &"
+          nohup java -jar paypro-web-backend-0.0.1-SNAPSHOT.jar > app.log 2>&1 &"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
