@@ -58,10 +58,19 @@ jobs:
           git pull origin develop && \
           ls && \
           pwd && \
-          cd paypro-web-backend &&\
+          cd paypro-web-backend/src/main/resources && \
+          echo \"DB.USERNAME=${DB_USERNAME}\" > secrets.properties && \
+          echo \"DB.PASSWORD=${DB_PASSWORD}\" >> secrets.properties && \
+          echo \"DB.NAME=${DB_NAME}\" >> secrets.properties && \
+          echo \"SERVER.IP=${SERVER_IP}\" >> secrets.properties && \
+          cd ../../../ && \
           chmod +x gradlew && \
           ./gradlew build && \
           cd build/libs && \
           nohup java -jar paypro-web-backend-0.0.1-SNAPSHOT.jar > app.log 2>&1 &"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
